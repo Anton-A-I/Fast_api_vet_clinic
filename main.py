@@ -44,5 +44,10 @@ def root():
     ...
 
 # ваш код здесь
-...
-...
+@app.post('/post')
+def post():
+    {
+  "id": 0,
+  "timestamp": 0
+}
+# test
