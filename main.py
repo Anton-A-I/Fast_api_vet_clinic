@@ -46,9 +46,6 @@ def root():
 # ваш код здесь
 @app.post('/post')
 def post():
-   x = {
-  "id": 0,
-  "timestamp": 0
-}
-   return x
+    return Timestamp(id=1, timestamp=1234567890)
+   
 # test
