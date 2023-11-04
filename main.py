@@ -2,7 +2,7 @@ from enum import Enum
 from fastapi import FastAPI, Query
 from pydantic import BaseModel
 import datetime
-import time
+from typing import Annotated, List
 
 app = FastAPI()
 
@@ -52,9 +52,14 @@ def post(item: Timestamp):
     return {"id": item.id, "timestamp": item.timestamp}
 
 @app.get('/dog')
-def dog(kind: DogType = Query(...)):
+def dog(kind: Annotated[DogType, Query(...)]):
     filtered_dogs = [dog for dog in dogs_db.values() if dog.kind == kind]
     return {"dogs": filtered_dogs}
+
+# @app.get('/dog')
+# def dog(kind: DogType = Query(...)):
+#     filtered_dogs = [dog for dog in dogs_db.values() if dog.kind == kind]
+#     return {"dogs": filtered_dogs}
 
 # ваш код здесь
 # @app.post('/post')
