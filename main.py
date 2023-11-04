@@ -63,12 +63,12 @@ def root():
 #     post_db.append(Timestamp)
 #     return post_db
 
-@app.post('/post')
-def post(item: Timestamp):
-    # item.timestamp = datetime.datetime.now().hour
-    # item.id = len(post_db)
-    # post_db.append(item)
-    return post_db
+# @app.post('/post')
+# def post(item: Timestamp):
+#     # item.timestamp = datetime.datetime.now().hour
+#     # item.id = len(post_db)
+#     # post_db.append(item)
+#     return post_db
 
 
 @app.post('/post')
