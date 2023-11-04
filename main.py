@@ -39,8 +39,8 @@ post_db = [
     Timestamp(id=1, timestamp=10)
 ]
 
-post_db.append(Timestamp(id=10, timestamp=datetime.datetime.now().hour))
-print(post_db)
+# post_db.append(Timestamp(id=10, timestamp=datetime.datetime.now().hour))
+# print(post_db)
 
 
 @app.get('/')
@@ -50,10 +50,17 @@ def root():
 
 
 # ваш код здесь
-@app.post('/post')
-def post(zap: Timestamp):
-    result = post_db.append(zap)
-    return result
+# @app.post('/post')
+# def post(zap: Timestamp):
+#     result = post_db.append(zap)
+#     return result
 
+
+@app.post('/post')
+def post(id: int, zap: Timestamp):
+    zap.timestamp = datetime.datetime.now().hour
+    zap.id = id
+    post_db.append(zap)
+    return post_db
    
 # test
