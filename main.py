@@ -39,8 +39,7 @@ post_db = [
     Timestamp(id=1, timestamp=10)
 ]
 
-# dogs_db[7] = Dog(name='test', pk=7, kind=DogType.terrier)
-# print(dogs_db.get(2))
+
 @app.get('/')
 def root():
     # ваш код здесь
@@ -81,40 +80,4 @@ def update_dog(pk: Annotated[int, Path(..., title='Pk')], dog: Dog):
         return {"message": "Dog not found"}
 
 
-# @app.get('/dog/{pk}', summary='Get Dog By Pk')
-# def dog(pk: Annotated[int, Path(...)]):
-#     filtered_dogs_pk = [dog for dog in dogs_db.values() if dog.pk == pk]
-#     return {"dogs": filtered_dogs_pk}
 
-# @app.get('/dog')
-# def dog(kind: DogType = Query(...)):
-#     filtered_dogs = [dog for dog in dogs_db.values() if dog.kind == kind]
-#     return {"dogs": filtered_dogs}
-
-# ваш код здесь
-# @app.post('/post')
-# def post(zap: Timestamp):
-#     result = post_db.append(zap)
-#     return result
-
-
-# @app.post('/post')
-# def post(id: int):
-#     Timestamp.timestamp = datetime.datetime.now().hour
-#     Timestamp.id = id
-#     post_db.append(Timestamp)
-#     return post_db
-
-# @app.post('/post')
-# def post(item: Timestamp):
-#     # item.timestamp = datetime.datetime.now().hour
-#     # item.id = len(post_db)
-#     # post_db.append(item)
-#     return post_db
-
-
-
-
-
-
-# test
