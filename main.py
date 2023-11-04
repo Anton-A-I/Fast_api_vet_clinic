@@ -39,15 +39,21 @@ post_db = [
     Timestamp(id=1, timestamp=10)
 ]
 
-# post_db.append(Timestamp(id=10, timestamp=datetime.datetime.now().hour))
-# print(Timestamp.timestamp)
-
 
 @app.get('/')
 def root():
     # ваш код здесь
     return {"message": "Hello World"}
 
+@app.post('/post')
+def post(item: Timestamp):
+    item.id = len(post_db)
+    item.timestamp = datetime.datetime.now().hour
+    return {"id": item.id, "timestamp": item.timestamp}
+
+@app.get('/dog')
+def dog(dog: Dog):
+    return dog
 
 # ваш код здесь
 # @app.post('/post')
@@ -71,10 +77,8 @@ def root():
 #     return post_db
 
 
-@app.post('/post')
-def post(item: Timestamp):
-    item.id = len(post_db)
-    item.timestamp = datetime.datetime.now().hour
-    return {"id": item.id, "timestamp": item.timestamp}
+
+
+
 
 # test
