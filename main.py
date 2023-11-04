@@ -65,9 +65,9 @@ def root():
 
 @app.post('/post')
 def post(item: Timestamp):
-    item.timestamp = datetime.datetime.now().hour
-    item.id = len(post_db)
-    post_db.append(item)
-    return post_db
+    # item.timestamp = datetime.datetime.now().hour
+    # item.id = len(post_db)
+    # post_db.append(item)
+    return {"id": item[0].id, "timestamp": item[0].timestamp}
 
 # test
