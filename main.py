@@ -40,7 +40,7 @@ post_db = [
 ]
 
 # dogs_db[7] = Dog(name='test', pk=7, kind=DogType.terrier)
-# print(dogs_db)
+# print(dogs_db.get(2))
 @app.get('/')
 def root():
     # ваш код здесь
@@ -55,7 +55,7 @@ def post(item: Timestamp):
 @app.get('/dog', summary='Get Dogs')
 def dog(kind: Annotated[DogType, Query(...)]):
     filtered_dogs = [dog for dog in dogs_db.values() if dog.kind == kind]
-    return {"dogs": filtered_dogs}
+    return filtered_dogs
 
 @app.post('/dog', response_model=Dog, summary='Create Dog')
 def create_dog(dog: Dog):
@@ -64,9 +64,18 @@ def create_dog(dog: Dog):
     return dog
 
 @app.get('/dog/{pk}', summary='Get Dog By Pk')
-def dog(pk: Annotated[int, Path(...)]):
-    filtered_dogs_pk = [dog for dog in dogs_db.values() if dog.pk == pk]
-    return {"dogs": filtered_dogs_pk}
+def dog(pk: Annotated[int, Path(..., title='Pk')]) -> Dog:
+    dog = dogs_db.get(pk)
+    if dog:
+        return dog
+    else:
+        return {"message": "Dog not found"}
+
+
+# @app.get('/dog/{pk}', summary='Get Dog By Pk')
+# def dog(pk: Annotated[int, Path(...)]):
+#     filtered_dogs_pk = [dog for dog in dogs_db.values() if dog.pk == pk]
+#     return {"dogs": filtered_dogs_pk}
 
 # @app.get('/dog')
 # def dog(kind: DogType = Query(...)):
