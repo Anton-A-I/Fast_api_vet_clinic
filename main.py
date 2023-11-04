@@ -1,5 +1,5 @@
 from enum import Enum
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, Path
 from pydantic import BaseModel
 import datetime
 from typing import Annotated, List
@@ -62,6 +62,11 @@ def create_dog(dog: Dog):
     new_key = int(list(dogs_db.keys())[-1]+1)
     dogs_db[new_key] = Dog(name='test'+str(new_key), pk=new_key, kind=DogType.terrier)
     return dog
+
+@app.get('/dog/{pk}', summary='Get Dog By Pk')
+def dog(pk: Annotated[Dog.pk, Path(...)]):
+    filtered_dogs_pk = [dog for dog in dogs_db.values() if dog.pk == pk]
+    return {"dogs": filtered_dogs_pk}
 
 # @app.get('/dog')
 # def dog(kind: DogType = Query(...)):
