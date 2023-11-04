@@ -1,5 +1,5 @@
 from enum import Enum
-from fastapi import FastAPI
+from fastapi import FastAPI, Path
 from pydantic import BaseModel
 import datetime
 import time
@@ -51,9 +51,10 @@ def post(item: Timestamp):
     item.timestamp = datetime.datetime.now().hour
     return {"id": item.id, "timestamp": item.timestamp}
 
-@app.get('/dog')
-def dog(dog: Dog):
-    return dog
+@app.get('/dog/{kind}')
+def dog(kind: DogType = Path(...)):
+    filtered_dogs = [dog for dog in dogs_db.values() if dog.kind == kind]
+    return {"dogs": filtered_dogs}
 
 # ваш код здесь
 # @app.post('/post')
