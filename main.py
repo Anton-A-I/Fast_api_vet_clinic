@@ -64,7 +64,7 @@ def create_dog(dog: Dog):
     return dog
 
 @app.get('/dog/{pk}', summary='Get Dog By Pk')
-def dog(pk: Annotated[Dog.pk, Path(...)]):
+def dog(pk: Annotated[int, Path(...)]):
     filtered_dogs_pk = [dog for dog in dogs_db.values() if dog.pk == pk]
     return {"dogs": filtered_dogs_pk}
 
