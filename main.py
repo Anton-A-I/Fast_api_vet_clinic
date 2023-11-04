@@ -72,6 +72,15 @@ def dog(pk: Annotated[int, Path(..., title='Pk')]) -> Dog:
         return {"message": "Dog not found"}
 
 
+@app.patch('/dog/{pk}', response_model=Dog, summary='Update Dog')
+def update_dog(pk: Annotated[int, Path(..., title='Pk')], dog: Dog):
+    if pk in dogs_db:
+        dogs_db[pk] = dog
+        return dog
+    else:
+        return {"message": "Dog not found"}
+
+
 # @app.get('/dog/{pk}', summary='Get Dog By Pk')
 # def dog(pk: Annotated[int, Path(...)]):
 #     filtered_dogs_pk = [dog for dog in dogs_db.values() if dog.pk == pk]
