@@ -1,6 +1,7 @@
 from enum import Enum
 from fastapi import FastAPI
 from pydantic import BaseModel
+import datetime
 
 app = FastAPI()
 
@@ -44,8 +45,8 @@ def root():
     return {"message": "Hello World"}
 
 # ваш код здесь
-@app.post('/post')
-def post():
-    return {"id": 0, "timestamp": 0}
+@app.post('/post/{id}')
+def post(id: int):
+    return {"id": id, "timestamp": datetime.datetime.now()}
    
 # test
