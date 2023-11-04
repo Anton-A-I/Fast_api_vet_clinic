@@ -40,7 +40,7 @@ post_db = [
 ]
 
 # post_db.append(Timestamp(id=10, timestamp=datetime.datetime.now().hour))
-# print(post_db)
+# print(Timestamp.timestamp)
 
 
 @app.get('/')
@@ -68,6 +68,14 @@ def post(item: Timestamp):
     # item.timestamp = datetime.datetime.now().hour
     # item.id = len(post_db)
     # post_db.append(item)
-    return {"id": item[0].id, "timestamp": item[0].timestamp}
+    return post_db
+
+
+@app.post('/post')
+def post(item: Timestamp):
+    # item.timestamp = datetime.datetime.now().hour
+    # item.id = len(post_db)
+    # post_db.append(item)
+    return {"id": item.id, "timestamp": item.timestamp}
 
 # test
