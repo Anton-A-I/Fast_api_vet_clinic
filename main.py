@@ -58,10 +58,10 @@ def dog(kind: Annotated[DogType, Query(...)]):
     return {"dogs": filtered_dogs}
 
 @app.post('/dog', response_model=Dog, summary='Create Dog')
-def create_dog(elem: DogType):
+def create_dog(dog: Dog):
     new_key = int(list(dogs_db.keys())[-1]+1)
     dogs_db[new_key] = Dog(name='test'+str(new_key), pk=new_key, kind=DogType.terrier)
-    return elem
+    return dog
 
 # @app.get('/dog')
 # def dog(kind: DogType = Query(...)):
