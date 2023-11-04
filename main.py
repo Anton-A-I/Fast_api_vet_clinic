@@ -46,22 +46,22 @@ def root():
     # ваш код здесь
     return {"message": "Hello World"}
 
-@app.post('/post')
+@app.post('/post', summary='Get Post')
 def post(item: Timestamp):
     item.id = len(post_db)
     item.timestamp = datetime.datetime.now().hour
     return {"id": item.id, "timestamp": item.timestamp}
 
-@app.get('/dog')
+@app.get('/dog', summary='Get Dogs')
 def dog(kind: Annotated[DogType, Query(...)]):
     filtered_dogs = [dog for dog in dogs_db.values() if dog.kind == kind]
     return {"dogs": filtered_dogs}
 
 @app.post('/dog', response_model=Dog, summary='Create Dog')
-def create_dog(dog: DogType):
+def create_dog(elem: DogType):
     new_key = int(list(dogs_db.keys())[-1]+1)
     dogs_db[new_key] = Dog(name='test'+str(new_key), pk=new_key, kind=DogType.terrier)
-    return dog
+    return elem
 
 # @app.get('/dog')
 # def dog(kind: DogType = Query(...)):
