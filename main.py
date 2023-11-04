@@ -56,11 +56,18 @@ def root():
 #     return result
 
 
+# @app.post('/post')
+# def post(id: int):
+#     Timestamp.timestamp = datetime.datetime.now().hour
+#     Timestamp.id = id
+#     post_db.append(Timestamp)
+#     return post_db
+
 @app.post('/post')
 def post(id: int):
     Timestamp.timestamp = datetime.datetime.now().hour
     Timestamp.id = id
     post_db.append(Timestamp)
     return post_db
-   
+
 # test
