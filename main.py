@@ -41,7 +41,7 @@ post_db = [
 @app.get('/')
 def root():
     # ваш код здесь
-    ...
+    return {"message": "Hello World"}
 
 # ваш код здесь
 @app.post('/post')
