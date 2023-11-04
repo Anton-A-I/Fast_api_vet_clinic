@@ -39,7 +39,8 @@ post_db = [
     Timestamp(id=1, timestamp=10)
 ]
 
-
+# dogs_db[7] = Dog(name='test', pk=7, kind=DogType.terrier)
+# print(dogs_db)
 @app.get('/')
 def root():
     # ваш код здесь
@@ -55,6 +56,12 @@ def post(item: Timestamp):
 def dog(kind: Annotated[DogType, Query(...)]):
     filtered_dogs = [dog for dog in dogs_db.values() if dog.kind == kind]
     return {"dogs": filtered_dogs}
+
+@app.post('/dog', response_model=Dog, summary='Create Dog')
+def create_dog(dog: DogType):
+    new_key = int(list(dogs_db.keys())[-1]+1)
+    dogs_db[new_key] = Dog(name='test'+str(new_key), pk=new_key, kind=DogType.terrier)
+    return dog
 
 # @app.get('/dog')
 # def dog(kind: DogType = Query(...)):
