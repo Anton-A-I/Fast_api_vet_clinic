@@ -2,6 +2,7 @@ from enum import Enum
 from fastapi import FastAPI
 from pydantic import BaseModel
 import datetime
+import time
 
 app = FastAPI()
 
@@ -38,15 +39,21 @@ post_db = [
     Timestamp(id=1, timestamp=10)
 ]
 
+post_db.append(Timestamp(id=10, timestamp=datetime.datetime.now().hour))
+print(post_db)
+
 
 @app.get('/')
 def root():
     # ваш код здесь
     return {"message": "Hello World"}
 
+
 # ваш код здесь
-@app.post('/post/{id}')
-def post(id: int):
-    return {"id": id, "timestamp": datetime.datetime.now()}
+@app.post('/post')
+def post(zap: Timestamp):
+    result = post_db.append(zap)
+    return result
+
    
 # test
