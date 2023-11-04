@@ -1,5 +1,5 @@
 from enum import Enum
-from fastapi import FastAPI, Path
+from fastapi import FastAPI, Query
 from pydantic import BaseModel
 import datetime
 import time
@@ -51,8 +51,8 @@ def post(item: Timestamp):
     item.timestamp = datetime.datetime.now().hour
     return {"id": item.id, "timestamp": item.timestamp}
 
-@app.get('/dog/{kind}')
-def dog(kind: DogType = Path(...)):
+@app.get('/dog')
+def dog(kind: DogType = Query(...)):
     filtered_dogs = [dog for dog in dogs_db.values() if dog.kind == kind]
     return {"dogs": filtered_dogs}
 
