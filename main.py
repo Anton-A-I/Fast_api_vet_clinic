@@ -57,10 +57,10 @@ def root():
 
 
 @app.post('/post')
-def post(id: int, zap: Timestamp):
-    zap.timestamp = datetime.datetime.now().hour
-    zap.id = id
-    post_db.append(zap)
+def post(id: int):
+    Timestamp.timestamp = datetime.datetime.now().hour
+    Timestamp.id = id
+    post_db.append(Timestamp)
     return post_db
    
 # test
