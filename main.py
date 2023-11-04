@@ -64,10 +64,10 @@ def root():
 #     return post_db
 
 @app.post('/post')
-def post(id: int):
-    Timestamp.timestamp = datetime.datetime.now().hour
-    Timestamp.id = id
-    post_db.append(Timestamp)
+def post(item: Timestamp):
+    item.timestamp = datetime.datetime.now().hour
+    item.id = len(post_db)
+    post_db.append(item)
     return post_db
 
 # test
